@@ -1,0 +1,158 @@
+/* Fonts, Roboto from Google Fonts */
+body {
+    font-family: 'Roboto', 'Verdana', 'Arial', sans-serif;
+    padding-left: 5%;
+    padding-right: 5%;
+    }
+    
+    h2, h3 {
+        padding-top: 20px;
+    }
+    
+    hr {
+        border-top: 2px solid;
+    }
+
+    label {
+        font-size: 80%;
+    }
+    
+    .footer {
+        font-size: 70%;
+        font-style: italic;
+    }
+    
+    a.undecorated{
+        /*text-decoration: none; */
+        color: black;
+    }
+    
+    input {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    input.number {
+        width: 50px;
+    }
+    
+    .bold {
+        font-weight: bold;
+    }
+    
+    .extrapad {
+        padding-top: 20px;
+    }
+
+    .mbottom {
+        margin-bottom: 30px;
+    }
+
+    .alkuun {
+        padding-top: 20px;
+        font-size: small;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    
+    th {
+        text-align: left;
+        font-weight: normal;
+        font-style: italic;
+    }
+    
+    #lomake th {
+        font-size: 80%;
+    }
+
+
+    /* Smaller padding for trashcan button to diminish row height */
+    button.trash {
+        padding: 3px;
+    }
+
+    /* a bit unintuitive, but this makes the trashcan icon itself smaller */
+    i {
+        font-size: 80%;
+    }
+    
+    #pituustaulukko table {
+        border: 1px solid;
+        border-color: #730202;
+    }
+    
+    #pituustaulukko th {
+        border: 1px solid;
+        border-color: #730202;
+        padding: 10px;
+    }
+    
+    #pituustaulukko td {
+        border: 1px solid;
+        border-color: #730202;
+        padding: 10px;
+    }
+
+    .left{
+        float:left;
+        margin-bottom: 20px;
+    }
+    
+    .right{
+        float:left;
+        margin-left: 5px; /* to put some space between this and the button on the left of it */
+        margin-bottom: 20px;
+    }
+
+    .clear{
+        clear: both; /* to clear the float after the buttons above */
+    }
+
+    hr {
+        clear: both; /* to clear the float left by the bottom buttons */
+    }
+
+
+    img.centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+      }
+
+
+    
+    figcaption {
+        width: 300px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    
+
+    iframe.centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      a.red{
+        /*text-decoration: none; */
+        color: #730202;
+    }
+
+    a.noul{
+        text-decoration: none;;
+    }
+
+    .monospace{
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    #todo li {
+        padding: 5px;
+    }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Loimilaskuri pirtanauhalle</title>
+<title>Loimilaskuri lautanauhalle</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="css/colors.css">
 <link rel="stylesheet" href="css/layout.css">
@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<script src="js/lpituus.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="js/jscript.js"></script>
 <script src="https://kit.fontawesome.com/a251d3b27f.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,109 +20,224 @@
 
 <div id="content">
 
-<h1>Loimilaskuri pirtanauhalle</h1>
+<h1>Loimilaskuri lautanauhalle</h1>
 
-<p><em>META:</em> <a class="red" href="pirtanauha.html">Taustatietoa pirtanauhalaskurista</a> ja <a class="red" href="synty.html">Pirtanauhalaskurin syntytarina</a>.</p>
+<p><em>Kaikki tällä sivulla käytettävät laskukaavat ovat peräisin Maikki Kariston kirjasta "Lautanauhat", s. 45
+    (vuoden 2010 kovakantinen ensipainos).</em></p>
+
+<!-- <p>Mitä lautanauha on?</p>-->
 
 <p>Voit laskea ensin loimen pituuden valmiin nauhan pituuden perusteella ja sitten tarvittavat lankamäärät.
-    Voit myös siirtyä suoraan lankamäärä laskuriin ja asettaa siihen itse loimen pituuden.
+    Voit myös siirtyä suoraan <a class="red" href="#lankalaskurialue">lankamäärälaskuriin</a> ja asettaa siihen itse loimen pituuden. Sivun lopusta löydät
+    <a class="red" href="#painolaskurit">langanpainolaskurit</a>, joilla voit laskea suunnilleen, montako grammaa tiettyä lankaa tarvitaan.
 </p>
 
 <div id="pituuslaskurialue">
 
 <h2>Loimen pituuden laskeminen</h2>
 
-<!-- Peruslaskutoimitus: 10 % kutistumisvaraa + 30 cm tutkaimia -->
+<p>Laskuri laskee, kuinka pitkä loimi sinun pitää luoda, jos valmista nauhaa halutaan esimerkiksi 150 cm. Syötä luvut
+    kokonaislukuina; jos syötät desimaaleja, lomake pyöristää ne alaspäin lähimpään kokonaislukuun.
+</p>
 
-<p>Laskuri laskee, kuinka pitkä loimi sinun pitää luoda, jos valmista nauhaa halutaan esimerkiksi 150 cm.</p>
+<p>Laskukaava on Maikki Kariston kirjasta "Lautanauhat" (s. 45): tutkaimet (alku ja loppu) 50 cm, kutistuminen 30 %.
+    Jos olet epävarma nauhan alun onnistumisesta, lisää siihen haluamasi kokeiluvara (Kariston suositus 10-20 cm).
+    Samoin jos teet samasta loimesta useampia nauhoja ja haluat nauhoihin hapsut, muista lisätä loimeen hapsuvaraa.
+</p>
 
-<form id="pituuslaskuri">
+<form id="pituuslaskuri" name="pituuslaskuri">
     <label for="tpituus">Kirjoita tähän valmiin nauhan pituus sentteinä:</label></br>
     <input class="number" type="number" id="tpituus" name="tpituus"> cm</br>
-    <label for="lpituus">Mahdollinen lisäpituus (esim. tupsuihin) sentteinä:</label><br>
+    <label for="lpituus">Mahdollinen lisäpituus (esim. hapsuihin) sentteinä:</label><br>
     <input class="number" type="number" id="lpituus" name="lpituus"> cm
 </form>
 
-<button id="laskepituus" type="button" onclick="laskePituus()">Laske</button>
+<button id="laskepituus" type="submit">Laske pituus</button>
 
-<p id="laskutulos" style="display:none;">Loimen täytyy olla <span id="vpituus"></span> cm pitkä.</p>
+<p style="display:none;" id="laskutulos">Loimen täytyy olla vähintään <span id="vpituus"></span> cm pitkä.</p>
 
-<button id="kopioipituus" type="button" style="display:none;" onclick="kopioiTeksti()">Kopioi mitta leikepöydälle</button>
 
-</diV>
+<p class="extrapad">
+    <button class="left hidden" id="kopioipituus" type="button" onclick="kopioiPituus()">Kopioi mitta leikepöydälle</button>
+    <button class="right hidden" id="tyhjennaloimi" type="button">Tyhjennä laskuri</button>
+    </p>
 
-<div id="lankakaskurialue">
+
+
+</div>  <!-- pituuslaskurialueen loppu-->
+
+<hr>
+
+
+<div id="lankalaskurialue">
 
 <h2>Langan tarpeen laskuri</h2>
 
-<p id="hideaway" style="display:none;">Lasketaan langan menekki <span id="apituus">0</span> sentin loimelle.</p>
+<p style="display:none;" id="toistapituus">Lasketaan langan menekki <span class="bold" id="apituus"></span> sentin loimelle.</p>
+
+
+<h3>Loimen pituus käsin asetettuna</h3>
 
 <p>Jos haluat laskea lankamäärät jollekin muulle loimelle kuin yllä lasketulle,
-    voit kirjoittaa ruutuun uuden mitan sentteinä ja painaa sitten Aseta pituus-nappia.</p>
+    voit kirjoittaa ruutuun halutun <em>loimen</em> mitan sentteinä ja painaa sitten Aseta pituus-nappia.</p>
 
 <form id="uusipituus">
     <input class="number" type="number" id="upituus" name="upituus"> cm</br>
 </form>
 
-<button id="vaihdapituus" type="button" onclick="vaihdaPituus()">Aseta pituus</button>
+<p>
+<button class="left" id="vaihdapituus" type="button">Aseta loimen pituus</button>
+<button class="right" id="tyhjennauusipituus" type="button">Tyhjennä loimen pituus</button>
+</p>
 
-<p id="showaway" style="display:none;">Lasketaan langan menekki <span id="fpituus"></span> sentin loimelle.</p>
+<p class="clear" style="display:none;" id="naytauusipituus">Lasketaan langan menekki <span class="bold" id="fpituus"></span> sentin loimelle.</p>
 
-<p class="extrapad">Kirjoita langan väri ja merkitse lankojen kokonaismäärä kutomisohjeen mukaan.
-    Jos käytät kuviolankoja kaksinkertaisina, laita merkki ruutuun "Tuplaus", niin saat oikean langan pituuden.<br>
+
+<h3 class="clear">Langan kokonaispituuden laskuri</h3>
+
+<p class="clear" class="extrapad">Valitse langan väri paletista ja merkitse sen värin lankojen kokonaismäärä pujotusohjeen mukaan.<br>
     Jos vahingossa teet ylimääräisen rivin, paina roskakorin kuvaa rivin lopussa ja rivi häviää.
 </p>
 
 
 <table id="lomake">
 <form id="lankalaskuri">
+    <thead>
     <tr>
         <th>Väri</th>
         <th>Lankamäärä</th>
-        <th>Tuplaus
-        </th>
         <th></th>
     </tr>
     <tr>
-        <td><input id="vari1" type="text" name="vari" pattern="[a-zA-Z0-9]+"></td>
-        <td><input id="lmaara1" class="number" type="number" name="maara" min="1" max="100"></td>
-        <td><input type="checkbox" name="tupla"></td>
+        <td><input id="vari1" type="text" name="vari"></td>
+        <td><input id="lmaara1" class="number" type="number" name="maara"></td>
         <td></td>
     </tr>
+    </thead>
+    <tbody id="varitaulukko">
+
+    </tbody>
 
 </form>
 </table>
 
 
-<p><button id="lisaarivi" type="button" onclick="addRow()">Lisää rivi</button></p>
+<p><button id="lisaarivi" type="button">Lisää rivi</button></p>
 
-<p><button id="laskelangat" class="bold mbottom" type="button" onclick="findData()">Laske</button></p>
+<p><button id="laskelangat" class="bold mbottom" type="button">Laske pituudet</button></p>
 
 <div id="tulostettava">
 
-<div id="taulukko" onclick="findData()">
-
-</div>
-
-<p id="langatyht" style="display:none;">Laskelmaan käytetty loimen pituus: <span id="pituusf"></span> cm.</br>
-Lankoja (yksin- tai kaksinkertaisena) yhteensä: <span id="lankamaara"></span>.</p>
-
-</div>
-
-<p class="extrapad"><button class="left" id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button>
-    <button class="right" id="tyhjenna" type="button" onclick="tyhjenna(), refresh()" style="display:none;">Tyhjennä sivun tiedot</button></p>
+<div id="tulostaulukko"></div>
 
 
-</div>
+<table class="hidden" id="pituustaulukko" class="mbottom">
+    <thead>
+        <tr>
+            <th>Väri</th>
+            <th>Lankamäärä</th>
+            <th>Langan kokonaispituus</th>
+        </tr>
+        <tr>
+            <td id="vari1tulos"></td>
+            <td id="lanka1tulos"></td>
+            <td id="lanka1pituus"></td>
+        </tr>
+        </thead>
+        <tbody id="loputtulokset"></tbody>
+
+</table>
+
+
+<p class="hidden" id="langatyht">Laskelmaan käytetty loimen kokonaispituus: <span id="pituusf"></span> cm.</br>
+Lankoja yhteensä: <span id="lankamaara"></span>.</p>
+
+<p class="hidden" id="kudelaskelma">Kudelangan tarve on noin <span id="kude"></span> m (10 % loimilankojen kokonaispituudesta).</p>
+
+
+</div> <!-- tulostettavan alueen loppu -->
+
+<button class="hidden" id="tulostataulukko" onclick="tulosta()">Tulosta laskelmat</button>
+
+<button class="hidden" id="tyhjennaloimet" type="button">Tyhjennä loimilaskelmat</button></p>
+
+<p><a class="alkuun red" href="#content">Takaisin sivun alkuun</a></p>
+
+
+</div> <!-- lankalaskurialueen loppu -->
+
+
+<hr>
+
+
+<div id="painolaskurit">
+
+<h2>Langan painon laskuri</h2>
+
+<p>Haluatko tietää, riittääkö varastossa oleva 15 gramman jämäkerä loimeen? Tai haluatko selvittää, paljonko lankaa pitää ostaa?
+    Painolaskuri antaa <em>viitteellisen arvon</em> siitä, montako grammaa lankaa olisi hyvä olla. Valitse oikea laskuri sen mukaan, onko lankasi
+    juoksevuus ilmoitettu metreinä grammoissa vai tex-numeroilla.<br>
+</p>
+
+
+<h3>Juoksevuus ilmoitettu grammaa / metriä</h3>
+
+<p>Käytä tätä laskuria, kun langan juoksevuus on ilmoitettu esimerkiksi  50 g / 150 m. Ilmoita langan kokonaispituus
+    täysinä metreinä.
+</p>
+
+<form id="grammalaskuri">
+    <label for="kpituus">Tarvittavan lankamäärän pituus metreinä</label></br>
+    <input class="number" type="number" id="langanpituus" name="langanpituus"> m</br>
+    <label for="metrit">Metrit (langan tiedoista)</label></br>
+    <input class="number" type="number" id="metrit" name="metrit"> m</br>
+    <label for="grammat">Grammat (langan tiedoista)</label><br>
+    <input class="number" type="number" id="grammat" name="grammat"> g
+</form>
+
+<button id="laskegrammatmetreista" type="button">Laske paino</button>
+
+<p class="hidden" id="laskutulosmetreista">Lankaa tarvitaan noin <span id="painometreista"></span> grammaa.</br>
+(Langantarve <span id="ltarve"></span> metriä, lanka <span id="lankametrit"></span> m/<span id="lankagrammat"></span> g.)</p>
+
+<button class="hidden" id="tyhjennamgrammat" type="button">Tyhjennä laskuri</button>
+
+<p><a class="alkuun red" href="#content">Takaisin sivun alkuun</a></p>
+
+<h3>Juoksevuus ilmoitettu texillä</h3>
+
+<p>Käytä tätä laskuria, kun langan juoksevuus on ilmoitettu tex-arvona, esimerkiksi &quot;tex 125 x 2&quot; tai &quot;125 tex x 2&quot;
+    Kirjoita isompi numero (tex-luku) ensimmäiseen ruutuun ja pienempi numero (säikeiden määrä) toiseen ruutuun. Ilmoita langan kokonaispituus
+    täysinä metreinä.
+</p>
+
+<form id="texlaskuri">
+    <label for="ltpituus">Tarvittavan lankamäärän pituus metreinä</label></br>
+    <input class="number" type="number" id="ltlanganpituus" name="ltlanganpituus"> m</br>
+    <label for="tex">Tex</label></br>
+    <input class="number" type="number" id="tex1" name="tex1"> x <input class="number" type="number" id="tex2" name="tex2">
+</form>
+
+<button id="lasketulostexista" type="button">Laske paino</button>
+
+
+<p class="hidden" id="laskutulostexista">Lankaa tarvitaan noin <span id="painotexista"></span> grammaa.</br>
+(Langantarve <span id="lttarve"></span> metriä, lanka <span id="ltex1"></span> tex x <span id="ltex2"></span>.)</p>
+
+<button class="hidden" id="tyhjennatexit" type="button">Tyhjennä laskuri</button>
+
+
+<p><a class="alkuun red" href="#content">Takaisin sivun alkuun</a></p>
+
+</div> <!-- painolaskurialueen loppu -->
+
 
 <hr>
 
 <p class="footer">&copy; Mari Voipio 2023, mari.voipio@lucet.fi</p>
-
-<p class="footer">Taustakuva: <a class="undecorated" href="https://www.finna.fi/Record/skm.158567390330000" target="_blank">Suomen käsityön museo</a>
 </p>
 
-</div>
+</div> <!-- content div loppuu tässä-->
 
 </body>
 </html> 
