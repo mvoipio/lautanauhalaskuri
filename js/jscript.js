@@ -31,7 +31,7 @@ $('#laskepituus').click(function () {
         return false;
     } 
 
-    lpituus = parseInt(alkuPituus * 1.3 + 65 + lisaPituus) ;
+    lpituus = parseInt(alkuPituus * 1.3 + 50 + lisaPituus) ;
 
 
     $('#vpituus').text(lpituus);
