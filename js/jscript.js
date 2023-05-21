@@ -60,8 +60,6 @@ function kopioiPituus() {
     });
   }
 
-  $("div").empty(); // ei enää muista, mitä tämä tekee - onko tarpeellinen?
-
   // resetoi laskurin ja tulokset
 
   $(document).ready(function(){
@@ -78,6 +76,10 @@ function kopioiPituus() {
   });
 });
 
+
+// Langan menekin laskuri alkaa tästä
+
+
 // vaihtaa loimen pituuden ja nollaa vanhan
 
 $(document).ready(function(){
@@ -92,9 +94,6 @@ $(document).ready(function(){
     
     });
     });
-
-
-// TODO: Tyhjennysnappi tehty, muttei ei toiminnallisuutta!
 
 
 // Dynaaminen taulukko
@@ -155,8 +154,6 @@ $('#varitaulukko').on('click', '.trash', function () {
 });
 
 
-// TODO: Lankojen lukumäärän validaatio jo syöttövaiheessa?
-// Validaatio tarvitaan joka tapauksessa!
 
 $(document).ready(function(){
     $("#laskelangat").click(function(){  
@@ -286,6 +283,9 @@ $(document).ready(function(){
   });
   
 
+
+ // Painolaskuri alkaa tästä 
+
 $(document).ready(function(){
     $('#laskegrammatmetreista').click(function () {
     var tmetrit = parseInt($('#langanpituus').val());  // tarvittava metrimäärä
@@ -305,7 +305,6 @@ $(document).ready(function(){
     });
 });
 
-// TODO: Laskutuloksen pyöristys täysiin grammoihin!
 
 
 $(document).ready(function(){
@@ -335,12 +334,9 @@ $(document).ready(function(){
 
     $('#tyhjennatexit').show(); // Näytetään laskurin tyhjennysnappi
 
- //   console.log(tmetrit, grammat, lmetrit);
- //   console.log(grammamaara);
     });
 });
 
-// TODO: Laskutuloksen pyöristys täysiin grammoihin!
 
 
 $(document).ready(function(){
