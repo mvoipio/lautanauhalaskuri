@@ -123,7 +123,7 @@ Tein töitä pomodoro-tekniikalla eli 25 min töitä, 5 min taukoa. Aina en muis
 
 ## Mitä seuraavaksi?
 
-Suunnitteluohjelma [https://jamespbarrett.github.io/tabletweave/] (Tablet Weaving Draft Designer), jota käytän aika paljon, tallentaa haluttaessa suunnitelmat helposti luettavaan tekstimuotoon. Teoriassa pitäisi olla mahdollista lukea .tdd-tiedoston pujotuskaavio-osuudesta, montako lankaa mitäkin väriä tarvitaan, minkä jälkeen tiedon voisi tuupata automaattisesti laskuriin. Värit on merkitty tiedostoon värikoodeilla, joten ne olisi suhteellisen helppo muuntaa värineliöiksi taulukkoon.
+Suunnitteluohjelma Tablet Weaving Draft Designer (https://jamespbarrett.github.io/tabletweave/), jota käytän aika paljon, tallentaa haluttaessa suunnitelmat helposti luettavaan tekstimuotoon. Teoriassa pitäisi olla mahdollista lukea .tdd-tiedoston pujotuskaavio-osuudesta, montako lankaa mitäkin väriä tarvitaan, minkä jälkeen tiedon voisi tuupata automaattisesti laskuriin. Värit on merkitty tiedostoon värikoodeilla, joten ne olisi suhteellisen helppo muuntaa värineliöiksi taulukkoon.
 
 Myös 20 vuotta vanha, mutta yhä joiltakin osin paras suunnitteluohjelma GTT tallentaa kaaviot käyttäjän koneelle. Tiedostomuodon spesifikaatio on (vielä toistaiseksi) netissä, joten on ihan mahdollista, että lankamäärät ja värit voisi onkia myös .gtt-tiedostoista.
 
